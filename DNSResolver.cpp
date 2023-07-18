@@ -33,7 +33,7 @@ void DNSResolver::__init() {
 
 void DNSResolver::__fini() {
 	if (ctx_udns) {
-		fprintf(stderr,"__fini\n");
+		// fprintf(stderr,"__fini\n");
 		dns_free(ctx_udns);
 		ctx_udns = nullptr;
 	}
@@ -57,13 +57,13 @@ void DNSResolver::__open() {
 }
 
 void DNSResolver::io_wait_read() {
-	fprintf(stderr,"io_wait_read\n");
+	// fprintf(stderr,"io_wait_read\n");
 	asio_socket->async_receive(boost::asio::null_buffers(),
 				   boost::bind(&DNSResolver::iocb_read_avail, this));
 }
 
 void DNSResolver::iocb_read_avail() {
-	fprintf(stderr,"iocb_read_avail\n");
+	// fprintf(stderr,"iocb_read_avail\n");
 	dns_ioevent(ctx_udns, time(nullptr));
 
 	if (requests_pending)
